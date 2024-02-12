@@ -113,7 +113,7 @@ export default {
         }
 
       } else {
-        this.puntos.jugador2[1]++;
+        this.puntos.jugador2[this.current_set]++;
 
         console.log(this.puntos.jugador2[this.current_set]);
 
