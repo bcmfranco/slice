@@ -23,7 +23,7 @@
 
     </div>
 
-    <div id="wrapper">
+    <div id="wrapper" v-if="match_alive">
 
       <div id="court" :style="{ backgroundColor: courtBackgroundColor }">
         <div id="energy">{{ this.energy }}</div>
@@ -59,6 +59,7 @@
 export default {
   data() {
     return {
+      match_alive: true,
       energy: 0,
       player_active: 1,
       points: {
@@ -90,6 +91,7 @@ export default {
         this.current_set++;
       } else {
         console.log("Partido terminado");
+        this.match_alive = false;
       }
     },
     getPoint(player){ // Da por ganador el punto y el set si es necesario
@@ -175,6 +177,7 @@ export default {
       setTimeout(() => {
         this.courtBackgroundColor = '#ffffff33'; // Restaurar color de fondo después de 1 segundo
       }, 1000);
+      this.match_alive = true;
       
       // console.log("marcador", this.points.player_1, " - ", this.points.player_2);
       // console.log("nuevo marcador", this.puntos.jugador1[1], " - ", this.puntos.jugador2[1]);
@@ -389,6 +392,7 @@ export default {
     flex-direction: row;
     margin: 0px;
     gap: 10px;
+    margin: 0 auto;
   }
 
   .player_name{
