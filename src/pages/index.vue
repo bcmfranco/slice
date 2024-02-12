@@ -213,7 +213,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añadí una sombra suave */
+    box-shadow: -2px 3px 4px 0px rgba(0, 0, 0, 3); 
   }
 
   .racket:hover {
@@ -233,7 +233,7 @@ export default {
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añadí una sombra suave */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 3); /* Añadí una sombra suave */
   }
 
   #restart_btn:hover {
