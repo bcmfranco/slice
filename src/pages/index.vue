@@ -7,13 +7,17 @@
       <div class="player_score">
         <div class="player_name" id="player_1_name">Player 1</div>
         <ul>
-          <li>{{ points.player_1 }}</li>
+          <li>{{ puntos.jugador1[1] }}</li>
+          <li>{{ puntos.jugador1[2] }}</li>
+          <li>{{ puntos.jugador1[3] }}</li>
         </ul>
       </div>
       <div class="player_score">
         <div class="player_name" id="player_2_name">Player 2</div>
         <ul>
-          <li>{{ points.player_2 }}</li>
+          <li>{{ puntos.jugador2[1] }}</li>
+          <li>{{ puntos.jugador2[2] }}</li>
+          <li>{{ puntos.jugador2[3] }}</li>
         </ul>
       </div>
 
@@ -66,8 +70,13 @@ export default {
       showElement: true,
       diceRolling: false,
       dice: 1,
-      courtBackgroundColor: '#ffffff33', // Color de fondo inicial del #court,
-    }
+      courtBackgroundColor: '#ffffff33', // Color de fondo inicial del #court
+      puntos: {
+        jugador1: { 1: 0, 2: 0, 3: 0 },
+        jugador2: { 1: 0, 2: 0, 3: 0 },
+      },
+      current_set: 1,
+    };
   },
   methods: {
     rollDice() {
@@ -82,11 +91,14 @@ export default {
 
       if(player === 1){
         this.points.player_1++;
+        this.puntos.jugador1[1]++;
       } else {
         this.points.player_2++;
+        this.puntos.jugador2[1]++;
       }
 
-      console.log("marcador", this.points.player_1, " - ", this.points.player_2);
+      // console.log("marcador", this.points.player_1, " - ", this.points.player_2);
+      console.log("nuevo marcador", this.puntos.jugador1[1], " - ", this.puntos.jugador2[1]);
     },
     shot(player) {
       var shot_power = this.rollDice();
@@ -122,6 +134,10 @@ export default {
       // Reinicia el puntaje y el estado del juego
       this.points.player_1 = 0;
       this.points.player_2 = 0;
+
+      this.puntos.player1[1] = 0;
+      this.puntos.player2[1] = 0;
+
       this.energy = 0;
       this.player_active = 1;
       this.courtBackgroundColor = '#ff6666'; // Cambiar color de fondo en caso de 'Fail'
@@ -129,7 +145,9 @@ export default {
         this.courtBackgroundColor = '#ffffff33'; // Restaurar color de fondo después de 1 segundo
       }, 1000);
       
-      console.log("marcador", this.points.player_1, " - ", this.points.player_2);
+      // console.log("marcador", this.points.player_1, " - ", this.points.player_2);
+      console.log("nuevo marcador", this.puntos.jugador1[1], " - ", this.puntos.jugador2[1]);
+
     }
   }
 }
@@ -334,6 +352,13 @@ export default {
     align-items: center;
     font-size: 24px;
     height: 50px;
+  }
+
+  .player_score ul{
+    display: flex;
+    flex-direction: row;
+    margin: 0px;
+    gap: 10px;
   }
 
   .player_name{
