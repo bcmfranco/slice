@@ -72,35 +72,66 @@ export default {
       dice: 1,
       courtBackgroundColor: '#ffffff33', // Color de fondo inicial del #court
       puntos: {
-        jugador1: { 1: 0, 2: 0, 3: 0 },
-        jugador2: { 1: 0, 2: 0, 3: 0 },
+        jugador1: { 1: 4, 2: 4, 3: 4 },
+        jugador2: { 1: 4, 2: 4, 3: 4 },
       },
       current_set: 1,
     };
   },
   methods: {
-    rollDice() {
+    rollDice() { // Rola el dado
       this.dice = Math.floor(Math.random() * 6) + 1;
       console.log("dice", this.dice);
 
       return this.dice;
     },
-    getPoint(player){
+    getSet(){ // Da por ganador el set y cambia al siguiente
+      if(this.current_set < 3){
+        this.current_set++;
+      } else {
+        console.log("Partido terminado");
+      }
+    },
+    getPoint(player){ // Da por ganador el punto y el set si es necesario
 
       console.log("punto para", player);
 
       if(player === 1){
-        this.points.player_1++;
-        this.puntos.jugador1[1]++;
+        this.puntos.jugador1[this.current_set]++;
+
+        console.log(this.puntos.jugador1[this.current_set]);
+
+
+        if(this.puntos.jugador1[this.current_set] > 5){
+          if(this.puntos.jugador1[this.current_set] > 6){
+            this.getSet();
+          } else {
+            if(this.puntos.jugador2[this.current_set] < 5){
+              this.getSet();
+            }
+          }
+        }
+
       } else {
-        this.points.player_2++;
         this.puntos.jugador2[1]++;
+
+        console.log(this.puntos.jugador2[this.current_set]);
+
+        if(this.puntos.jugador2[this.current_set] > 5){
+          if(this.puntos.jugador2[this.current_set] > 6){
+            this.getSet();
+          } else {
+            if(this.puntos.jugador1[this.current_set] < 5){
+              this.getSet();
+            }
+          }
+        }
       }
 
       // console.log("marcador", this.points.player_1, " - ", this.points.player_2);
-      console.log("nuevo marcador", this.puntos.jugador1[1], " - ", this.puntos.jugador2[1]);
+      // console.log("nuevo marcador", this.puntos.jugador1[1], " - ", this.puntos.jugador2[1]);
     },
-    shot(player) {
+    shot(player) { // Hace jugar el punto con show_power y energy
       var shot_power = this.rollDice();
 
 
@@ -115,12 +146,12 @@ export default {
       console.log("energy: ",this.energy, "power:", shot_power);
 
       if(shot_power > this.energy){
-        console.log("hi");
+        // console.log("hi");
         this.energy = shot_power - this.energy;
 
         console.log("new energy: ",this.energy);
       } else {
-        console.log("hao");
+        // console.log("hao");
         this.energy = 0;
         this.courtBackgroundColor = '#ff6666'; // Cambiar color de fondo en caso de 'Fail'
         setTimeout(() => {
@@ -132,11 +163,11 @@ export default {
     },
     restartMatch() {
       // Reinicia el puntaje y el estado del juego
-      this.points.player_1 = 0;
-      this.points.player_2 = 0;
 
-      this.puntos.player1[1] = 0;
-      this.puntos.player2[1] = 0;
+      this.puntos = {
+        jugador1: { 1: 0, 2: 0, 3: 0 },
+        jugador2: { 1: 0, 2: 0, 3: 0 },
+      };
 
       this.energy = 0;
       this.player_active = 1;
@@ -146,8 +177,7 @@ export default {
       }, 1000);
       
       // console.log("marcador", this.points.player_1, " - ", this.points.player_2);
-      console.log("nuevo marcador", this.puntos.jugador1[1], " - ", this.puntos.jugador2[1]);
-
+      // console.log("nuevo marcador", this.puntos.jugador1[1], " - ", this.puntos.jugador2[1]);
     }
   }
 }
