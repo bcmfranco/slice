@@ -19,23 +19,28 @@
 
     </div>
 
-    <div id="court" :style="{ backgroundColor: courtBackgroundColor }">
-      <div id="energy">{{ this.energy }}</div>
-      <div id="barr" :class="{ 'ball_home': player_active === 1, 'ball_away': player_active === 2 }">
-        <div id="ball"></div>
-      </div>
-    </div>
+    <div id="wrapper">
 
-    <div id="joystick">
-      <div id="dice">
-        <div>{{ dice }}</div>
+      <div id="court" :style="{ backgroundColor: courtBackgroundColor }">
+        <div id="energy">{{ this.energy }}</div>
+        <div id="barr" :class="{ 'ball_home': player_active === 1, 'ball_away': player_active === 2 }">
+          <div id="ball"></div>
+        </div>
       </div>
 
-      <div id="controlers">
-        <button class="racket" id="racket_p1" @click="shot(1)">P1</button>
-        <button class="racket" id="racket_p2" @click="shot(2)">P2</button>
+      <div id="joystick">
+        <div id="dice">
+          <div>{{ dice }}</div>
+        </div>
+
+        <div id="controlers">
+          <button class="racket" id="racket_p1" @click="shot(1)">P1</button>
+          <button class="racket" id="racket_p2" @click="shot(2)">P2</button>
+        </div>
       </div>
+
     </div>
+
 
     <div id="buttoner">
       <div id="restart_btn" @click="restartMatch">Restart Match</div>
@@ -162,8 +167,8 @@ export default {
   }
 
   #joystick {
-    width: 300px;
-    height: 200px;
+    width: 100px;
+    height: 400px;
     border: 2px solid #dddddd;
     background-color: #ffffff33;
     border-radius: 15px;
@@ -171,6 +176,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
   }
 
   .points {
@@ -187,6 +194,7 @@ export default {
 
   #controlers {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -232,11 +240,17 @@ export default {
     background-color: #f1655b; /* Cambié el color al pasar el ratón */
   }
 
+  #wrapper{
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 20px 0px;
+    gap: 30px;
+  }
+
   #court {
     border: 2px solid #cccccc; /* Cambié el color del borde */
     width: 150px;
-    height: 300px;
-    margin: 10px auto 20px auto;
+    height: 400px;
     border-radius: 15px;
     display: grid;
     justify-items: center;
@@ -254,7 +268,7 @@ export default {
 
   #barr {
     width: 30px;
-    height: 200px;
+    height: 250px;
     background-color: #849db2;
     display: flex;
     align-items: center;
