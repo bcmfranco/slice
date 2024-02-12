@@ -29,12 +29,14 @@
       </div>
 
       <div id="joystick">
-        <div id="dice">
-          <div>{{ dice }}</div>
-        </div>
 
         <div id="controlers">
           <button class="racket" id="racket_p1" @click="shot(1)">P1</button>
+
+          <div id="dice">
+            <div>{{ dice }}</div>
+          </div>
+
           <button class="racket" id="racket_p2" @click="shot(2)">P2</button>
         </div>
       </div>
