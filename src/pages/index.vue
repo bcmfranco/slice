@@ -124,7 +124,7 @@ export default {
       this.player_active = 1;
       this.courtBackgroundColor = '#ff6666'; // Cambiar color de fondo en caso de 'Fail'
       setTimeout(() => {
-        this.courtBackgroundColor = '#f2f2f2'; // Restaurar color de fondo después de 1 segundo
+        this.courtBackgroundColor = '#ffffff33'; // Restaurar color de fondo después de 1 segundo
       }, 1000);
       
       console.log("marcador", this.points.player_1, " - ", this.points.player_2);
